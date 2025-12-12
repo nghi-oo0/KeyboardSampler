@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Live Sampler</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="about-style">
+    
+    <div class="container">
+        <header>
+            <h1>Keyboard Live Sampler</h1>
+            <p>A WebChucK-powered platform for live music performance and manipulation.</p>
+                
+            <div>
+                <a href="app.html" class="btn btn-primary">Launch App 🎛️</a>
+                    
+            <a href="https://github.com/nghi-oo0/WebTest/" target="_blank" class="btn btn-secondary">View Source on GitHub 🐱</a>
+            </div>
+        </header>
+
+        <section>
+            <h2>Introduction</h2>
+            <p>
+                <strong>Keyboard Live Sampler</strong> is a browser-based platform for real-time music performance and manipulation, built using <strong>WebChucK</strong> Our inspiration is physical hardware samplers that give users the ability to record, edit, and perform audio directly on the keyboard.
+            <p>
+                The system includes a <strong>smart recording engine</strong> that automatically detects audio onsets, quantizes loops to a global tempo, and supports real-time transformations such as mixing, concatenation, reversing, pitch shifting, and applying reverb.
+            </p>
+        </section>
+
+        <section>
+            <h2>Core Functionality</h2>
+
+            <h3>Performance</h3>
+            <ul>
+                <li><strong>10-Slot Sample Bank:</strong> Access 10 independent audio buffers (keys <strong>1–0</strong>), each capable of holding up to 10 seconds of audio.</li>
+                <li><strong>Smart Recording:</strong> When armed (key <strong>R</strong>), the system waits for an audio threshold before capturing, ensuring clean start points without silence at the beginning.</li>
+                <li><strong>Auto-Quantization:</strong> Recordings are automatically trimmed and snapped to the nearest musical beat based on the BPM. If a user records 3.8 beats, the system rounds it to 4.0 beats and inserts the necessary silence to maintain perfect rhythm.</li>
+                <li><strong>Looping & Retriggering:</strong> Users can toggle looping per slot or rapidly retrigger samples for stutter effects.</li>
+            </ul>
+
+            <h3>Sound Manipulating & Editing</h3>
+            <ul>
+                <li><strong>Effects:</strong> Render effects permanently into new slots (Reverb, Reverse, Pitch Shift).</li>
+                <li><strong>Macro Modes:</strong> Use Concatenate (<code>Key F</code>) to sequence samples or Mix (<code>Key G</code>) to layer them.</li>
+            </ul>
+
+            <h3>File Integration</h3>
+            <ul>
+                <li><strong>Uploading & Playback:</strong> Users can upload local audio files (MP3/WAV) and assign them into the live slots using the keys <strong>Q-W-E-A-S-D</strong>.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Technical Overview</h2>
+            <p>The project follows a hybrid architecture, using <strong>HTML/JavaScript</strong> for the interface and <strong>ChucK</strong> for audio processing.</p>
+            
+            <h3>Frontend (HTML/JS)</h3>
+            <p>The visual interface manages user interactions, file decoding, and status indicators.</p>
+            <ul>
+                <li><strong>Bridge Architecture:</strong> The <code>script.js</code> file initializes the WebChucK instance. It handles the <code>AudioContext</code> to decode uploaded files into raw PCM data (<code>Float32Array</code>) before sending them to the ChucK engine via the <code>loadBuffer</code> global array.</strong></li>
+            </ul>
+
+            <h3>Audio Engine (ChucK)</h3>
+            <p>The core logic resides in <code>main.ck</code></p>
+            <ul>
+                <li><strong>Concurrency (Shreds):</strong> The audio engine uses multiple concurrent shreds, such as:</li>
+                    <ul>
+                        <li><code>runClock()</code>: Maintains the global tempo.</li>
+                        <li><code>monitorMic()</code>: Analyzes input volume for visualization.</li>
+                        <li><code>bufferLoaderLoop()</code>: Receives sample data from JavaScript.</li>
+                    </ul>
+                <li><strong>Memory Management (LiSa):</strong> The project uses <strong>LiSa</strong> (Live Sampling) objects for audio manipulation. It is configured with feedback set to <code>0</code>, ensuring that new recordings completely replace old data (Tape Recorder behavior) rather than overdubbing.</li>
+                <li><strong>Signal Flow:</strong> Mic Input -> Gain -> LiSa (Sampler) -> Reverb -> Limiter -> Speakers.</li>
+            </ul>
+        </section>
+    </div>
+
+</body>
+</html>

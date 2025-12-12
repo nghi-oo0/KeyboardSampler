@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Live Sampler</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="controls">
+        <h1>Keyboard Live Sampler</h1>
+        
+        <div class="mic-wrapper">
+            <button id="startBtn">1. Start Mic & Engine</button>
+            <span class="mic-label">Mic: <div id="micLed" class="mic-indicator"></div></span>
+        </div>
+
+        <div class="upload-section">
+            <input type="file" id="fileInput" class="hidden" multiple accept="audio/*">
+            <button id="uploadBtn" disabled>2. Upload Samples</button>
+            <div id="fileMapping">Upload files to map them to keys [Q, W, E, A, S, D]</div>
+        </div>
+
+        <div id="status" class="status-bar">Status: Waiting to start...</div>
+
+        <div class="bpm-control">
+            <span>BPM:</span>
+            <input type="number" id="bpmInput" value="100" min="40" max="300">
+        </div>
+    </div>
+
+    <div class="instructions">
+        <div>
+            <strong>PERFORMANCE:</strong><br>
+            [1-0] : Play / Queue / Select Source<br>
+            [R]   : Record Mic (Press to Arm, Speak to Start)<br>
+            [L]   : Toggle LOOP on/off<br>
+            [M]   : Toggle METRONOME<br>
+            [Space]: PANIC (Stop All)<br>
+            [- / =]: Select Previous/Next Slot<br>
+            [ [ / ] ]: Volume Down / Up<br>
+        </div>
+        <div>
+            <strong>EDITING & FX:</strong><br>
+            [Q,W,E,A,S,D] : Load Mapped File to Current Slot<br>
+            [Z] : Reverb (Destructive Bounce)<br>
+            [X] : Reverse (Destructive Bounce)<br>
+            [C] : Pitch Up (Destructive Bounce)<br>
+            [V] : Pitch Down (Destructive Bounce)<br>
+            [F] : Concatenate Mode<br>
+            [G] : Mix Mode
+        </div>
+    </div>
+
+    <div id="console">====================<br>CHUCK CONSOLE OUTPUT<br>====================<br></div>
+
+    <script type="module" src="script.js"></script>
+
+</body>
+</html>
