@@ -192,3 +192,8 @@ section {
 code {
     color: #0f0;
 }
+
+iframe {
+    display: block;
+    margin: 0 auto;
+}
