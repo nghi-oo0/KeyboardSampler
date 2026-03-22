@@ -1,7 +1,7 @@
 # Keyboard Live Sampler
 
 ## 1. Introduction
-**Keyboard Live Sampler** is a browser-based platform for real-time music performance and manipulation, built using **WebChucK**. Our inspiration is physical hardware samplers that give users the ability to record, edit, and perform audio directly on the keyboard.
+[**Keyboard Live Sampler**](https://nghi-oo0.github.io/KeyboardSampler/) is a browser-based platform for real-time music performance and manipulation, built using **WebChucK**. Our inspiration is physical hardware samplers that give users the ability to record, edit, and perform audio directly on the keyboard.
 
 The system includes a **smart recording engine** that automatically detects audio onsets, quantizes loops to a global tempo, and supports real-time transformations such as mixing, concatenation, reversing, pitch shifting, and applying reverb.
 
